@@ -1,0 +1,74 @@
+import item.Item;
+import item.ItemShelf;
+import vendingmachine.VendingMachine;
+
+public class App {
+    public static void main(String[] args) throws Exception {
+        VendingMachine vendingMachine = new VendingMachine();
+        System.out.println("| Fill the Inventory |");
+        fillInventory(vendingMachine);
+
+        System.out.println("| Display the Inventory |");
+        displayInventory(vendingMachine);
+    
+    }
+
+    private static void fillInventory(VendingMachine vendingMachine){
+        ItemShelf[] itemShelfSlots = vendingMachine.getInventory().getInventory();
+        for(int i=0; i<itemShelfSlots.length; i++){
+            Item item = new Item();
+            if(i == 0 || i == 8){
+                item.setItemType("OREO");
+                item.setPrice(30);
+            }else if(i ==1 || i==9){
+                item.setItemType("JUICE");
+                item.setPrice(30);
+            }
+            else if(i ==2){
+                item.setItemType("COKE");
+                item.setPrice(45);
+            }
+            else if(i ==3){
+                item.setItemType("SODA");
+                item.setPrice(20);
+            }
+            else if(i ==4){
+                item.setItemType("CHIPS");
+                item.setPrice(20);
+            }
+            else if(i ==5){
+                item.setItemType("CHOCOLATE");
+                item.setPrice(60);
+            }
+            else if(i ==6){
+                item.setItemType("CANDY");
+                item.setPrice(5);
+            }else if(i ==7){
+                item.setItemType("GUM");
+                item.setPrice(5);
+            }
+            itemShelfSlots[i].setItem(item);
+            itemShelfSlots[i].setSoldOut(false);
+        }
+
+    }
+
+    private static void displayInventory(VendingMachine vendingMachine){
+        ItemShelf[] itemShelfSlots = vendingMachine.getInventory().getInventory();
+        for(ItemShelf shelf: itemShelfSlots){
+            System.out.println("Item Code: " + shelf.getItemCode()+ " Item: " + shelf.getItem().getType() + " Item Price: " + shelf.getItem().getPrice() + " isAvailable: "+ shelf.isSoldOut());
+        }
+    }
+}
+//public enum ItemType {
+  //  OREO,  i=0,8
+  //JUICE, i=1,9
+ // COKE,  i=2
+   // SODA, i =3
+    //CHIPS,i=4
+    //CHOCOLATE,  i=5
+  //  CANDY,    i=6  
+   // GUM;     i=7
+
+//}
+
